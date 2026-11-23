@@ -14,6 +14,40 @@ protection: they hash large memory regions on the render thread.
 | [freezemon](freezemon/) | External freeze monitor. Reads DXGI Present and CPU sampling events through ETW; injects nothing into the game. Logs every long frame and where the game spent that time. Use it to measure before and after the fix. |
 | [freezefix](freezefix/) | Runtime fix DLL, installed as the game's `dinput8.dll` (or loaded by ModEngine2). Applies a few small in-memory patches that skip the two stalling hash loops, re-applies them whenever the protection reverts them, and blocks all network access of the game. |
 
+## Quick start
+
+Tip: before installing the fix, measure the stutter with [freezemon](freezemon/) for a few minutes in game, with a
+save loaded. You will see the regular ~150 ms freezes yourself, and you can measure again afterwards to compare.
+
+1. Switch Steam to **Offline Mode**.
+2. Copy [`freezefix/bin/freezefix.dll`](freezefix/bin/freezefix.dll) into the game folder,
+   `...\steamapps\common\DARK SOULS III\Game\`, and rename it to **`dinput8.dll`**.
+3. Start the game from Steam as usual. The game reports that the network is unavailable and runs offline; that is
+   expected.
+4. Check `freezefix.log` next to the DLL: it should contain `patched inplace` and two `patched raw` lines (details
+   in the [freezefix README](freezefix/README.md#3-check-that-it-works)).
+
+<details>
+<summary><b>Alternative: ModEngine2</b></summary>
+
+Use this if you already play with ModEngine2, or if another mod occupies `dinput8.dll`.
+
+1. Download ModEngine2 **2.1.0.0 or newer** from its
+   [GitHub releases](https://github.com/soulsmods/ModEngine2/releases) and extract it to any folder.
+2. Copy `freezefix/bin/freezefix.dll` (keep its name) into that folder, next to `config_darksouls3.toml`.
+3. In `config_darksouls3.toml`, add it to `external_dlls` in the `[modengine]` section, next to any entries you
+   already have:
+   ```toml
+   [modengine]
+   external_dlls = ["freezefix.dll"]
+   ```
+4. Make sure there is no freezefix `dinput8.dll` in the game folder, switch Steam to Offline Mode and start the
+   game with `launchmod_darksouls3.bat`.
+
+</details>
+
+To uninstall, delete `dinput8.dll` from the game folder (or remove the `external_dlls` entry).
+
 ## Compatibility
 
 - Steam `DarkSoulsIII.exe` **1.15.2.0** only. On any other version freezefix writes a line to its log and patches
