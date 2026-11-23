@@ -1,0 +1,5 @@
+target/
+# runtime output next to the binaries
+*.log
+*.stop
+*.console.txt

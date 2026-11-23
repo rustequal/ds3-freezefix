@@ -1,0 +1,34 @@
+[package]
+name = "freezefix"
+version = "1.0.0"
+edition = "2024"
+description = "Runtime fix for the periodic ~150 ms stutter of Dark Souls III 1.15.2.0"
+license = "MIT"
+publish = false
+
+[lib]
+name = "freezefix"
+path = "src/dll.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+serde_json = "1"
+
+[dependencies.windows-sys]
+version = "0.61.2"
+features = [
+    "Win32_Foundation",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_Kernel",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Memory",
+    "Win32_System_SystemInformation",
+    "Win32_System_SystemServices",
+    "Win32_System_Threading",
+]
+
+[profile.release]
+codegen-units = 1
+lto = "fat"

@@ -1,0 +1,5 @@
+# LF everywhere: bodies.json is embedded into the DLL by include_str!, and source line numbers end up in panic
+# locations, so line endings must not depend on the checkout settings (reproducible build).
+* text eol=lf
+*.dll binary
+*.exe binary

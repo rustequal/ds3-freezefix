@@ -1,0 +1,32 @@
+{
+ "unpacked_sha256": "b883b4250e66a177cccb9bddd19ab367b18a696b93109dfbaf8253ee0472c59b",
+ "bodies": [
+  {
+   "begin": "0x8f55f0",
+   "end": "0x8f5649",
+   "orig": "e9e91f8b0490448977084ce860ffffff488b0d5181e803b201e80218f2ff488b0d9371fa034885c975264c8d0d6792e9014c8d05b8e14703488d0d31dfe401bab1000000e8a727e800488b0d6871fa034883c428e967a15c00",
+   "studio": "4883ec28c681dd01000000e860ffffff488b0d5181e803b201e80218f2ff488b0d9371fa034885c975264c8d0d6792e9014c8d05b8e14703488d0d31dfe401bab1000000e8a727e800488b0d6871fa034883c428e967a15c00",
+   "patch": [
+    "0x8f55f0",
+    "0x8f55fb"
+   ]
+  }
+ ],
+ "cave_bodies": [],
+ "raw_patches": [
+  {
+   "name": "check2_hash_loop_collapse",
+   "rva": "0x4f412a4",
+   "orig": "480f4dd8",
+   "patched": "90909090",
+   "note": "check #2 pass 1 (dword/iter): collapse the obfuscated cmovge self-loop; use-site 0x1ba3730 fully outlined"
+  },
+  {
+   "name": "check2_hash_loop2_collapse",
+   "rva": "0x4e589fa",
+   "orig": "0f8fadffffff",
+   "patched": "909090909090",
+   "note": "check #2 pass 2 (byte/iter): second convolution-hash loop, dominant after pass 1 collapsed (freeze #31/#52)"
+  }
+ ]
+}
